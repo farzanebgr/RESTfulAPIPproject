@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # INTERNAL_APPS
     'IDBM_app',
     # EXTERNAL_APPS
+    'rest_framework',
 
 ]
 

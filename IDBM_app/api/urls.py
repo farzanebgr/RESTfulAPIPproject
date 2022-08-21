@@ -13,10 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import path
+from IDBM_app.api.views import movie_list, movie_details
 urlpatterns = [
-    path('movie/', include('IDBM_app.api.urls')),
-    path('admin/', admin.site.urls),
+    path('list/', movie_list, name='movie-list'),
+    path('<int:pk>', movie_details, name='movie-details'),
 ]
