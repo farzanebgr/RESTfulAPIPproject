@@ -2,9 +2,14 @@ from rest_framework import serializers
 from IDBM_app.models import Movie
 
 
+def name_length(value):
+    if len(value) < 3:
+        raise serializers.ValidationError("name is too short!")
+
+
 class MovieSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField()
+    name = serializers.CharField(validators=[name_length])
     description = serializers.CharField()
     active = serializers.BooleanField()
 
@@ -24,8 +29,8 @@ class MovieSerializer(serializers.Serializer):
         else:
             return data
 
-    def validate_name(self, value):
-        if len(value) < 3:
-            raise serializers.ValidationError("Name is too short!")
-        else:
-            return value
+    # def validate_name(self, value):
+    #     if len(value) < 3:
+    #         raise serializers.ValidationError("Name is too short!")
+    #     else:
+    #         return value
