@@ -1,8 +1,21 @@
 from rest_framework import serializers
-from watch_list_app.models import WatchList, StreamPlatform
+from watch_list_app.models import WatchList, StreamPlatform, Review
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = "__all__"
+
+    def validate_rating(self, value):
+        if value < 1 or value > 5:
+            raise serializers.ValidationError("your rating is not valid!!!")
+        return value
 
 
 class WatchListSerializer(serializers.ModelSerializer):
+    review = serializers.StringRelatedField(many=True, read_only=True)
+
     class Meta:
         model = WatchList
         fields = "__all__"
@@ -19,7 +32,9 @@ class WatchListSerializer(serializers.ModelSerializer):
 
 
 class StreamPlatformSerializer(serializers.ModelSerializer):
-    watchlist = WatchListSerializer(many=True, read_only=True)
+    # watchlist = WatchListSerializer(many=True, read_only=True)
+    # watchlist = serializers.StringRelatedField(many=True)
+    # watchlist = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='watch-list-details')
 
     class Meta:
         model = StreamPlatform
