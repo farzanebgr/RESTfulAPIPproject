@@ -14,7 +14,7 @@
 #     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 # """
 # from django.urls import path
-# from IDBM_app.views import movie_list, movie_details
+# from watch_list_app.views import movie_list, movie_details
 # urlpatterns = [
 #     path('list/', movie_list, name='movie-list'),
 #     path('<int:pk>', movie_details, name='movie-details'),

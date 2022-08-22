@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-# from IDBM_app.models import Movie
+# from watch_list_app.models import Movie
 # from django.http import JsonResponse
 #
 #

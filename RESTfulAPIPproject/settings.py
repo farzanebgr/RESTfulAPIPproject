@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # INTERNAL_APPS
-    'IDBM_app',
+    'watch_list_app',
     # EXTERNAL_APPS
     'rest_framework',
 
