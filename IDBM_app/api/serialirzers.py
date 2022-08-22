@@ -3,11 +3,17 @@ from IDBM_app.models import Movie
 
 
 class MovieSerializer(serializers.ModelSerializer):
+    len_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Movie
         fields = "__all__"
         # fields = ['name', 'description']
         # exclude = ['active']
+
+    def get_len_name(self, object):
+        length = len(object.name)
+        return length
 
     def validate(self, data):
         if data['name'] == data['description']:
