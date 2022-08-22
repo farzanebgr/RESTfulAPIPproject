@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import status
 from IDBM_app.models import Movie
 from IDBM_app.api.serialirzers import MovieSerializer
 
@@ -24,12 +25,20 @@ def movie_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def movie_details(request, pk):
     if request.method == 'GET':
-        movie = Movie.objects.get(pk=pk)
+        try:
+            movie = Movie.objects.get(pk=pk)
+        except Movie.DoesNotExist:
+            return Response({'error': 'the movie does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+
         serializer = MovieSerializer(movie)
         return Response(serializer.data)
 
     if request.method == 'PUT':
-        movie = Movie.objects.get(pk=pk)
+        try:
+            movie = Movie.objects.get(pk=pk)
+        except Movie.DoesNotExist:
+            return Response({'ERROR': 'THE MOVIE DOES NOT EXIST.'}, status=status.HTTP_404_NOT_FOUND)
+
         serializer = MovieSerializer(movie, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -40,7 +49,7 @@ def movie_details(request, pk):
     if request.method == 'DELETE':
         movie = Movie.objects.get(pk=pk)
         movie.delete()
-        return Response()
+        return Response(status=status.HTTP_410_GONE)
 
 
 
