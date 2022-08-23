@@ -15,15 +15,16 @@ Including another URLconf
 """
 from django.urls import path
 from watch_list_app.api.views import WatchListAV, WatchListDetailsAV, StreamPlatformAV, StreamPlatformDetailAV, \
-   ReviewList, ReviewDetail
+   ReviewList, ReviewDetail, ReviewCreate
 
 urlpatterns = [
    path('watchlist/', WatchListAV.as_view(), name='watch-list'),
    path('watchlist/<int:pk>', WatchListDetailsAV.as_view(), name='watch-list-details'),
    path('platform/', StreamPlatformAV.as_view(), name='stream-platform-list'),
    path('platform/<int:pk>', StreamPlatformDetailAV.as_view(), name='stream-platform-detail'),
-   path('review/', ReviewList.as_view(), name='review-list'),
-   path('review/<int:pk>', ReviewDetail.as_view(), name='review-details'),
+   path('platform/<int:pk>/review-create/', ReviewCreate.as_view(), name='review-list'),
+   path('platform/<int:pk>/review/', ReviewList.as_view(), name='review-list'),
+   path('platform/review/<int:pk>', ReviewDetail.as_view(), name='review-details'),
 ]
 
 # from watch_list_app.api.views import movie_list, movie_details
@@ -33,4 +34,6 @@ urlpatterns = [
 #    path('<int:pk>', movie_details, name='movie-details'),
 #    path('list/', MovieListAV.as_view(), name='movie-list'),
 #    path('<int:pk>', MovieDetailsAV.as_view(), name='movie-detail'),
+# path('review/<int:pk>', ReviewDetail.as_view(), name='review-details'),
+
 # ]
