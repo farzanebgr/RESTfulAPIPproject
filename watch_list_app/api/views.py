@@ -1,8 +1,36 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from watch_list_app.models import WatchList, StreamPlatform
-from watch_list_app.api.serializers import WatchListSerializer, StreamPlatformSerializer
+from rest_framework import mixins
+from rest_framework import generics
+from watch_list_app.models import WatchList, StreamPlatform, Review
+from watch_list_app.api.serializers import WatchListSerializer, StreamPlatformSerializer, ReviewSerializer
+
+
+class ReviewList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+class ReviewDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin,
+                   generics.GenericAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
 
 class WatchListAV(APIView):
@@ -92,13 +120,6 @@ class StreamPlatformDetailAV(APIView):
         platform = StreamPlatform.objects.get(pk=pk)
         platform.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-
-
-
-
-
 
 # from watch_list_app.models import Movie
 # from rest_framework.decorators import api_view

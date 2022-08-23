@@ -14,13 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from watch_list_app.api.views import WatchListAV, WatchListDetailsAV, StreamPlatformAV, StreamPlatformDetailAV
+from watch_list_app.api.views import WatchListAV, WatchListDetailsAV, StreamPlatformAV, StreamPlatformDetailAV, \
+   ReviewList, ReviewDetail
 
 urlpatterns = [
    path('watchlist/', WatchListAV.as_view(), name='watch-list'),
    path('watchlist/<int:pk>', WatchListDetailsAV.as_view(), name='watch-list-details'),
    path('platform/', StreamPlatformAV.as_view(), name='stream-platform-list'),
    path('platform/<int:pk>', StreamPlatformDetailAV.as_view(), name='stream-platform-detail'),
+   path('review/', ReviewList.as_view(), name='review-list'),
+   path('review/<int:pk>', ReviewDetail.as_view(), name='review-details'),
 ]
 
 # from watch_list_app.api.views import movie_list, movie_details
