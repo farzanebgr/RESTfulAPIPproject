@@ -8,7 +8,8 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = "__all__"
+        # fields = "__all__"
+        exclude = ('watchlist',)
 
     def validate_rating(self, value):
         if value < 1 or value > 5:
@@ -18,7 +19,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 # Serializing for Watch List Model
 class WatchListSerializer(serializers.ModelSerializer):
-    review = serializers.StringRelatedField(many=True, read_only=True)
+    review = ReviewSerializer(many=True, read_only=True)
 
     class Meta:
         model = WatchList

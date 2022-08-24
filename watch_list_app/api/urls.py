@@ -23,11 +23,11 @@ router.register('platform', StreamPlatformVS, basename='platform')
 
 urlpatterns = [
     path('watchlist/', WatchListAV.as_view(), name='watch-list'),
-    path('watchlist/<int:pk>', WatchListDetailsAV.as_view(), name='watch-list-details'),
+    path('watchlist/<int:pk>/', WatchListDetailsAV.as_view(), name='watch-list-details'),
     path('', include(router.urls)),
     path('platform/<int:pk>/review-create/', ReviewCreate.as_view(), name='review-list'),
     path('platform/<int:pk>/review/', ReviewList.as_view(), name='review-list'),
-    path('platform/review/<int:pk>', ReviewDetail.as_view(), name='review-details'),
+    path('platform/review/<int:pk>/', ReviewDetail.as_view(), name='review-details'),
 ]
 
 # from watch_list_app.api.views import movie_list, movie_details
