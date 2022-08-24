@@ -28,6 +28,8 @@ urlpatterns = [
     path('platform/<int:pk>/review-create/', ReviewCreate.as_view(), name='review-list'),
     path('platform/<int:pk>/review/', ReviewList.as_view(), name='review-list'),
     path('platform/review/<int:pk>/', ReviewDetail.as_view(), name='review-details'),
+    path('api-auth', include('rest_framework.urls')),
+
 ]
 
 # from watch_list_app.api.views import movie_list, movie_details
