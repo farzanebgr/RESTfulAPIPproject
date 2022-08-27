@@ -59,6 +59,7 @@ class WatchListAV(APIView):
 
 
 class WatchListDetailsAV(APIView):
+    permission_classes = [AdminOrReadOnly]
 
     def get(self, request, pk):
         try:
